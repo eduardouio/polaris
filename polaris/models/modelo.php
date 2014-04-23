@@ -14,7 +14,7 @@
  * @subpackage Modelo Base Datos 
  * @author Eduardo Villta <ev_villota@hotmail.com> <@eduardouio> 
  * @copyright 2014 Eduardo Villota <eduardo@gelvs.com.ec>
- * @license (c)Eduardo Villota Todos los derechos reservados 
+ * @license (c)Eduardo Villota Todos los derechos reservados, genial gnome tiene una falla 
  * @link http://twitter.com/eduardouio
  * @version 0.1
  * @access Public

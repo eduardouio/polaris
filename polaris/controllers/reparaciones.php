@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Inicio extends CI_Controller {
+class Reparaciones extends CI_Controller {
 
 	/**
 	 * Im prime la pantalla de inicio
