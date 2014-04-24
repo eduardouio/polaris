@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:9090/polaris/';
+$config['base_url']	= 'http://gelvs.com.ec/polaris/';
 
 /*
 |--------------------------------------------------------------------------

@@ -7,7 +7,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Mantenimiento Polaris</a>
+        <a class="navbar-brand" href="<?php print base_url();?>">Mantenimiento Polaris</a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">          
@@ -29,4 +29,5 @@
       </div> 
       </div> 
       </div> 
+    
       
