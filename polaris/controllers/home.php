@@ -61,8 +61,6 @@ class Home extends CI_Controller {
 			//Cargamos las vistas
 			$this->mostrarhtml($this->CatalogoVistas_);	
 }
-
-
 	/**
 	* Se encrarga de recibir la informacion y genera la pantalla de salia
 	* Todos los valores se guardan en una variable de clase $Pagina_	

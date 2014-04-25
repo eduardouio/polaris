@@ -37,7 +37,10 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
+#esta ruta hace que cualquier direccion que pase por el home no se va a 404 sino que se direccione al controlador Home
+#al lado izquierdo se debe poner la ruta que se espera con los comodines existentes y al otro lado el controlador/metodo
+#al que la funcion apunta
+//$route['home/(:any)'] = "home";
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
