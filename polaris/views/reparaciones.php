@@ -1,6 +1,8 @@
-<div class="panel panel-info">
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">  
+  <div class="row placeholders">        
+<div class="panel panel-success">
 <div class="panel-heading">
-    <h3 class="panel-title centrar">Listado Vehículos</h3>    
+    <h3 class="panel-title centrar">Reparacioness</h3>    
   </div>
   <div class="panel-body">
      <table class="table table-bordered table-hover">                    
@@ -8,7 +10,7 @@
         <?php
         #usamos la variable para imprmir las cabeceras
         $i = 0;
-        foreach ($resultados as $row) {
+        foreach ($reparaciones as $row) {
             if ($i == 0){
                 print('<tr>');
                 $cabeceras = array_keys($row);
@@ -22,7 +24,7 @@
             $x = 0;
             foreach ($row as $item) {            
                 if ($x == 0){
-                  print '<td><a href="'. base_url() .'index.php/vehiculo/listado/' . $row['VIN']. '">' . $item . '</a></td>';                  
+                  print '<td><a href="'. base_url() .'index.php/vehiculo/' . $row['VIN']. '">' . $item . '</a></td>';                  
                 $x++;
                 }else{
                   print '<td>' . $item . '</td>';                                    
@@ -36,4 +38,6 @@
     </table>
   </div>
   </div>
+  </div>     
+  </div>     
   </div>     

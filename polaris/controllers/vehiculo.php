@@ -36,18 +36,28 @@ class Vehiculo extends CI_Controller {
 	 * Crea una ficha para un vehiculo, el id del vehiculo es
 	 * tomado de la url si no existe retorna al inicio de la página
 	 */
-	public function index(){		
+	public function listado(){		
 		if ($this->uri->segment(2)){
-			$this->CatalogoVistas_['header'] = array('titulo' => 'Último Mantenimiento ' .  $this->uri->segment(2));
+			$this->CatalogoVistas_['header'] = array('titulo' => 'Ultimo Mantenimiento ' .  $this->uri->segment(3));
 			$this->CatalogoVistas_['menu'] = array('clientes' => 'active' );			
-			$this->CatalogoVistas_['menu_lateral'] = array('' => '' );
-			$this->CatalogoVistas_['info'] = array('info' => $this->modelo->ultimo_mantenimiento($this->uri->segment(2)));
+			$this->CatalogoVistas_['info'] = array('info' => $this->modelo->ultimo_mantenimiento($this->uri->segment(3)));
+			$this->CatalogoVistas_['resultados'] = array('resultados' => $this->modelo->mantenimientos($this->uri->segment(3)));
+			$this->CatalogoVistas_['reparaciones'] = array('reparaciones' => $this->modelo->reparaciones($this->uri->segment(3)));
+			$this->mostrarhtml($this->CatalogoVistas_);
 		}else{
 			print('Imprimir redirecciń automatica al index del home');
 		}
 
-		$this->mostrarhtml($this->CatalogoVistas_);
+	}
 
+	public function buscar(){
+		if (!$_POST){
+			$this->CatalogoVistas_['header'] = array('titulo' => 'Ultimo Mantenimiento ' .  $this->uri->segment(3));
+			$this->CatalogoVistas_['menu'] = array('clientes' => 'active' );			
+			$this->CatalogoVistas_['form_vehiculos'] = array('clientes' => 'active' );			
+		}
+
+		$this->mostrarhtml($this->CatalogoVistas_);
 	}
 
 

@@ -20,7 +20,9 @@ class Modelo extends CI_Model{
 		$sql = "SELECT
 				a.id_vehiculo AS VIN, a.modelo AS Modelo, a.ingreso AS Ingreso,
 				c.nombre AS Ciudad,
-				d.nombre AS Encargado, concat(d.celular, _utf8'/', d.telefono ) AS `Tel Encargado`
+				d.nombre AS Encargado, concat(d.celular, _utf8'/', d.telefono ) AS `Tel Encargado`,
+				(SELECT count(*) from mantenimiento where id_vehiculo = a.id_vehiculo) as Mant,
+				(SELECT count(*) from reparacion where id_vehiculo = a.id_vehiculo) as Rep
 				FROM vehiculo AS a
 				LEFT JOIN ciudad AS c ON(a.id_ciudad = c.id_ciudad)
 				LEFT JOIN contacto AS d ON(a.id_contacto = d.id_contacto)
@@ -68,5 +70,53 @@ class Modelo extends CI_Model{
 		return $result->result_array();
 
 	}
+
+	/**
+	 * Metodo para obtener listado de mantenimientos de los vehpiculos
+	 * @param (str) VIN vehiculo
+	 * @return (array) result->array()
+	 */
+	public function mantenimientos($id_vehiculo){
+		$sql ="select a.id_mantenimiento as IDM, a.id_vehiculo as VIN, a.fecha as Fecha, a.kilometros as KM, a.periodo as HRS,
+				b.nombre as Ciudad,
+				c.id_viaje as Viaje,
+				(select cantidad from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1000) as PS4,
+				(select cantidad from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1001) as AGL,
+				(select round(cantidad,2) from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1002) as DEMFLU,
+				(select cantidad from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1003) as FILAC,
+				(select round(cantidad,2) from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1004) as REF,
+				(select round(cantidad, 2) from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1005) as FREN,
+				(select round(cantidad,2) from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1006) as GRASA,
+				(select cantidad from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1007) as FILAIR
+				from mantenimiento as a
+				left join ciudad as b on (a.id_ciudad = b.id_ciudad)
+				left join viaje as c on(a.id_viaje = c.id_viaje)
+				WHERE a.id_vehiculo = '$id_vehiculo'
+				order by a.id_vehiculo, a.id_mantenimiento;";
+
+				$result = $this->db->query($sql);
+				return $result->result_array();
+	}
+
+
+	/**
+	 * Metodo para obtener listado de mantenimientos de los vehpiculos
+	 * @param (str) VIN vehiculo
+	 * @return (array) result->array()
+	 */
+	public function reparaciones($id_vehiculo){
+		$sql ="select a.id_reparacion as IDR, a.id_vehiculo as VIN, a.fecha_entrada as Fecha, a.kilometros as KM, a.periodo as HRS,
+				b.nombre as Ciudad,
+				a.notas as Notas,
+				c.id_viaje as Viaje
+				from reparacion as a
+				left join ciudad as b on (a.id_ciudad = b.id_ciudad)
+				left join viaje as c on(a.id_viaje = c.id_viaje)
+				WHERE a.id_vehiculo = '$id_vehiculo'
+				order by a.id_vehiculo, a.id_reparacion;";
+				$result = $this->db->query($sql);
+				return $result->result_array();
+	}
+
 
 }
