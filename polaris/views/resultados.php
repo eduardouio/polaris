@@ -1,44 +1,45 @@
- <div class="row placeholders">        
-     <div class="row breadcrumb">
-  <div class="col-md-4"><b>VIN:</b>&nbsp;4XATH2334D222323</div>
-  <div class="col-md-4"><b>Cliente:</b>&nbsp;Magap Quito</div>
-  <div class="col-md-4"><b>Fecha Entrega:</b>&nbsp;22 de Enero del 2014</div>
-  <div class="col-md-4"><b>Ultimo Mantenimiento:</b>&nbsp;102</div>
-  <div class="col-md-4"><b>Encargado:</b>&nbsp;Fula no de Tal</div>  
-  <div class="col-md-4"><b>Contacto Magap:</b>&nbsp;Ing. Bolivar Garrido </div>  
-</div>
-        
-      <div class="panel panel-success">
-        <div class="panel-heading">
-    <h3 class="panel-title centrar">Mantenimientos</h3>    
+<div class="panel panel-info">
+<div class="panel-heading">
+    <h3 class="panel-title centrar">Listado Vehículos</h3>    
   </div>
-     <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Mantenimiento</th>
-          <th>Aceite DM</th>
-          <th>Aciete PS4</th>
-          <th>Aceite AGL</th>
-          <th>Filtro Aceite</th>
-          <th>Filtro Aire</th>
-          <th>Refrigerante</th>
-          <th>Líq. Fren.</th>
-        </tr>
-      </thead>
+  <div class="panel-body">
+     <table class="table table-bordered table-hover">                    
       <tbody>
-        <tr>
-          <td>101</td>          
-          <td>1</td>          
-          <td>0.275</td>          
-          <td>2</td>          
-          <td>1</td>          
-          <td>1</td>          
-          <td>1</td>          
-          <td>1</td>          
-          <td>1</td>          
-        </tr>       
+        <?php
+        #usamos la variable para imprmir las cabeceras
+        $i = 0;
+        foreach ($resultados as $row) {
+            if ($i == 0){
+                print('<tr>');
+                $cabeceras = array_keys($row);
+                foreach ($cabeceras as $key) {
+                    print('<th>' . $key .'</th>');
+                }
+                print('<th>Acciones</th>');                
+                print('</tr>');
+            }            
+            print('<tr>');
+            foreach ($row as $item) {            
+                print '<td>' . $item . '</td>';
+                }
+            print('
+              <td>
+              <div class="dropdown">
+              <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                <li><a href="'. base_url() .'index.php/vehiculo/' . $row['VIN']. '"><span></span>Ver Vehículo</a></li>
+                <li><a href="'. base_url() .'index.php/mantenimiento/' . $row['VIN']. '">Ver Mantenimientos</a></li>
+                <li><a href="'. base_url() .'index.php/inspeccion/' . $row['VIN']. '">Ver Inspecciones</a></li>
+                <li><a href="'. base_url() .'index.php/reparacion/' . $row['VIN']. '">Ver Reparaciones</a></li>                
+              </div>
+              </td>
+              ');
+            print('</tr>');
+            $i++;
+        }
+        ?>
       </tbody>
     </table>
-      </div>
-      </div>     
+  </div>
+  </div>
+  </div>     

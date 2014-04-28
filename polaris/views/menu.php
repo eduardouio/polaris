@@ -7,27 +7,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?php print base_url();?>">Mantenimiento Polaris</a>
+        <a class="navbar-brand" href="<?php print base_url();?>">Gelvs Polaris</a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">          
-          <li><a href="#">Solicitar Mantenimiento</a></li>            
-          <li><a href="#">Historial Vehiculo</a></li>            
+          <li class="<?php @print $clientes; ?>"><a href="<?php print base_url();?>">Inicio</a></li>            
+          <li class="<?php @print $buscar; ?>"><a href="<?php print base_url();?>index.php/vehiculo/buscar">Buscar</a></li>
+          <li class="<?php @print $solicitud; ?>"><a href="<?php print base_url();?>index.php/mantenimientos/solicitud">Solicitar Mantenimiento</a></li>
         </ul>          
       </div>
     </div>
   </div>
-
-<div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-3 col-md-2 sidebar">        
-        <ul class="nav nav-sidebar">          
-          <li><a href="<?php print base_url();?>/index.php/mantenimientos/">Reporte Mantenimientos</a></li>            
-          <li><a href="<?php print base_url();?>/index.php/reparaciones">Reporte Reparaciones</a></li>            
-          <li><a href="<?php print base_url();?>/index.php/inspecciones">Reporte Inspecciones</a></li>            
-        </ul>          
-      </div> 
-      </div> 
-      </div> 
-    
-      

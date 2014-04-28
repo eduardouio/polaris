@@ -16,7 +16,7 @@
  * @version 0.1
  * @access public
  */
-class Home extends CI_Controller {
+class Vehiculo extends CI_Controller {
 	private $Pagina_;
 	private $Controller_ = 'home';
 	private $CatalogoVistas_;
@@ -33,26 +33,22 @@ class Home extends CI_Controller {
 	}
 
 	/**
-	 * $_POST = formulario seleccionde cliente
-	 * !$_POST = Lsitado vehículos cliente
+	 * Crea una ficha para un vehiculo, el id del vehiculo es
+	 * tomado de la url si no existe retorna al inicio de la página
 	 */
-	public function index()
-	{	
-		if (!$_POST) {
-			# Mostramos el formulario
-			$this->CatalogoVistas_['header'] = array('titulo' => 'Polaris Mantenimiento' );
+	public function index(){		
+		if ($this->uri->segment(2)){
+			$this->CatalogoVistas_['header'] = array('titulo' => 'Último Mantenimiento ' .  $this->uri->segment(2));
 			$this->CatalogoVistas_['menu'] = array('clientes' => 'active' );			
-			$this->CatalogoVistas_['formulario_clientes'] = array('query' => $this->db->get('cliente'));
-		}else{		
-			# Mostrar los vehiculos del cliente
-			$this->CatalogoVistas_['header'] = array('titulo' => 'Información Cliente' );
-			$this->CatalogoVistas_['menu'] = array('clientes' => 'active' );
-			$this->CatalogoVistas_['info'] = array('info' => $this->modelo->clientes($this->input->post('cliente')));
-			$this->CatalogoVistas_['resultados'] = array('resultados' => $this->modelo->vehiculos($this->input->post('cliente')));
+			$this->CatalogoVistas_['menu_lateral'] = array('' => '' );
+			$this->CatalogoVistas_['info'] = array('info' => $this->modelo->ultimo_mantenimiento($this->uri->segment(2)));
+		}else{
+			print('Imprimir redirecciń automatica al index del home');
+		}
+
+		$this->mostrarhtml($this->CatalogoVistas_);
+
 	}
-			//Cargamos las vistas
-			$this->mostrarhtml($this->CatalogoVistas_);			
-}
 
 
 	/**
