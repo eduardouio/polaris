@@ -36,23 +36,43 @@ class Home extends CI_Controller {
 	 * $_POST = formulario seleccionde cliente
 	 * !$_POST = Lsitado vehículos cliente
 	 */
-	public function index()
-	{	
-		if (!$_POST) {
+	public function index(){	
 			# Mostramos el formulario
 			$this->CatalogoVistas_['header'] = array('titulo' => 'Polaris Mantenimiento' );
 			$this->CatalogoVistas_['menu'] = array('clientes' => 'active' );			
-			$this->CatalogoVistas_['formulario_clientes'] = array('query' => $this->db->get('cliente'));
-		}else{		
+			$this->CatalogoVistas_['formulario'] = array('clientes' => 'active' );
+			$this->mostrarhtml($this->CatalogoVistas_);
+		}
+
+	/**
+	 *  Retorna el listado de vehiculos de un cliente
+	 */
+	public function cliente(){
 			# Mostrar los vehiculos del cliente
-			$this->CatalogoVistas_['header'] = array('titulo' => 'Información Cliente' );
-			$this->CatalogoVistas_['menu'] = array('clientes' => 'active' );
-			$this->CatalogoVistas_['info'] = array('info' => $this->modelo->clientes($this->input->post('cliente')));
-			$this->CatalogoVistas_['resultados'] = array('resultados' => $this->modelo->vehiculos($this->input->post('cliente')));
+		$this->CatalogoVistas_['header'] = array('titulo' => 'Información Cliente' );
+		$this->CatalogoVistas_['menu'] = array('clientes' => 'active' );
+		$this->CatalogoVistas_['info'] = array('info' => $this->modelo->clientes($this->uri->segment(3)));
+		$this->CatalogoVistas_['resultados'] = array('resultados' => $this->modelo->vehiculos($this->uri->segment(3)));
+		$this->mostrarhtml($this->CatalogoVistas_);
+		
 	}
-			//Cargamos las vistas
-			$this->mostrarhtml($this->CatalogoVistas_);			
-}
+
+
+
+	/**
+	 * Retorna un listado de cientes
+	 */
+	public function vehiculo(){
+		if ($_POST){
+		$this->CatalogoVistas_['header'] = array('titulo' => 'Vehiculos Encontrados' );
+		$this->CatalogoVistas_['menu'] = array('clientes' => 'active' );		
+		$this->CatalogoVistas_['resultados'] = array('resultados' => $this->modelo->buscarVehiculo($this->input->post('vin')));
+		$this->mostrarhtml($this->CatalogoVistas_);
+	}else{
+		$this->index();
+	}
+	}
+	
 
 
 	/**

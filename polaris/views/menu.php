@@ -11,8 +11,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">          
-          <li class="<?php @print $clientes; ?>"><a href="<?php print base_url();?>">Inicio</a></li>            
-          <li class="<?php @print $buscar; ?>"><a href="<?php print base_url();?>index.php/vehiculo/buscar">Buscar</a></li>
+          <li class="<?php @print $clientes; ?>"><a href="<?php print base_url();?>">Polaris Gelvs</a></li>                      
           <li class="<?php @print $solicitud; ?>"><a href="<?php print base_url();?>index.php/mantenimientos/solicitud">Solicitar Mantenimiento</a></li>
         </ul>          
       </div>

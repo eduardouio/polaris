@@ -50,14 +50,15 @@ class Vehiculo extends CI_Controller {
 
 	}
 
+	/**
+	 * Busca un listado de vehiculos y lo retorna en 
+	 * un arreglo json para el autocomplete
+	 * @return (json) arreglo de datos en json
+	 */
 	public function buscar(){
 		if (!$_POST){
-			$this->CatalogoVistas_['header'] = array('titulo' => 'Ultimo Mantenimiento ' .  $this->uri->segment(3));
-			$this->CatalogoVistas_['menu'] = array('clientes' => 'active' );			
-			$this->CatalogoVistas_['form_vehiculos'] = array('clientes' => 'active' );			
+			//print json_encode(($this->modelo->vehiculo($this->input->post('vin')));
 		}
-
-		$this->mostrarhtml($this->CatalogoVistas_);
 	}
 
 

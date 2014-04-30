@@ -10,6 +10,7 @@
   <title><?php print $titulo; ?></title>
   <!-- Bootstrap core CSS -->
   <link href="<?php print base_url();?>css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php print base_url();?>css/flick/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="<?php print base_url();?>css/dashboard.css" rel="stylesheet">

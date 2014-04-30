@@ -82,7 +82,7 @@ class Modelo extends CI_Model{
 				c.id_viaje as Viaje,
 				(select cantidad from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1000) as PS4,
 				(select cantidad from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1001) as AGL,
-				(select round(cantidad,2) from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1002) as DEMFLU,
+				(select round(cantidad,3) from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1002) as DEMFLU,
 				(select cantidad from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1003) as FILAC,
 				(select round(cantidad,2) from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1004) as REF,
 				(select round(cantidad, 2) from mantenimiento_detalle where id_mantenimiento = a.id_mantenimiento and id_inventario = 1005) as FREN,
@@ -116,6 +116,46 @@ class Modelo extends CI_Model{
 				order by a.id_vehiculo, a.id_reparacion;";
 				$result = $this->db->query($sql);
 				return $result->result_array();
+	}
+
+
+	/**
+	 * Busca un listado de vehiculos en la base de datos
+	 * de acuerdo a los ultimos numeros del vin del vehiculo
+	 * @param (str) id_vehiculo parte del nombre del vehiculo
+	 * @return (array) result->array()
+	 */
+	public function buscarVehiculo($id_vehiculo){
+		$sql="SELECT
+				a.id_vehiculo AS VIN, a.modelo AS Modelo, a.ingreso AS Ingreso,
+				c.nombre AS Ciudad,
+				(SELECT nombre from cliente where id_cliente = a.id_cliente) as Cliente,
+				(SELECT count(*) from mantenimiento where id_vehiculo = a.id_vehiculo) as Mant,
+				(SELECT count(*) from reparacion where id_vehiculo = a.id_vehiculo) as Rep
+				FROM vehiculo AS a
+				LEFT JOIN ciudad AS c ON(a.id_ciudad = c.id_ciudad)
+				LEFT JOIN cliente as cli on (a.id_cliente = cli.id_cliente)
+				WHERE a.id_vehiculo LIKE'%$id_vehiculo'
+				OR a.id_vehiculo LIKE'$id_vehiculo%'
+				OR a.id_vehiculo LIKE'%$id_vehiculo%'
+				OR a.id_vehiculo = '$id_vehiculo'
+				ORDER BY cli.nombre DESC;
+		";
+		$result = $this->db->query($sql);
+		#print($this->db->last_query());
+		return $result->result_array();
+	}
+
+	/**
+	 * Busca un listado de clientes en la base de datos
+	 * de acuerdo a los ultimos numeros del vin del cliente
+	 * @param (str) id_cliente parte del nombre del cliente
+	 * @return (array) result->array()
+	 */
+	public function cliente($nombre){
+		$sql="select id_cliente, nombre from cliente where id_cliente like '%$id_cliente';";
+		$result = $this->db->query($sql);
+		return $result->result_array();
 	}
 
 
