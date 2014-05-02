@@ -1,39 +1,59 @@
-<form method="post" id="formulario" action="<?php print base_url();?>/home/solicitud/">
-		<fieldset>
-		<div class="control-group">
-			<div class="controls">
-				<label class="control-label">Nombres:</label> 
-				<input class="input-xlarge focused" required="required" placeholder="Igrese Sus Nombres" id="nombres" name="nombres" value="" type="text">				           
-			</div>			
-			<div class="controls">
-				<label class="control-label">Provincia:</label>
-				<input placeholder="Provincia" required="required" id="email" name="email" value="" type="text">
-			</div>			
-			<div class="controls">
-				<label class="control-label">Empresa:</label>            
-				<input class="input-small" placeholder="Empresa" required="required" id="empresa" name="empresa" value="" type="text">
-			</div>						
-				<div class="controls">
-				<label class="control-label">Telefono:</label>
-				<input class="input-small" required="required" placeholder="Telefono" id="telefono" name="telefono" value="" type="text">
-			</div>			
-				<div class="controls">
-				<label class="control-label">Asunto:</label>
-				<input class="input-xlarge" required="required" placeholder="Asunto Mensaje" id="asunto" name="asunto" value="" type="text">
-			</div>			
-			<div class="controls">
-				<label class="control-label">Descripción:</label>            
-				<textarea class="input-xlarge" required="required" placeholder="Sus Comentarios Son Importantes" id="texto_asunto" name="texto_asunto" rows="4" columns="20"></textarea>
-			</div>
-			<div class="controls">
-			<div class="form-actions">
-			<button type="submit" class="btn btn-info">Enviar Información</button>
-			<button type="reset" class="btn btn-warning">Reset</button>
-		</div>		
-		<b>Dirección Oficina: </b> Av Cristóbal Colón 1133 y Av. Rio Amazonas Edificio Arista Piso 5 <b>Of:</b> 502<br>
-		<b>Telfonos:</b> +593 (2) 2533-563 +593 (2) 2551-961 <b>Fax:</b> 593 (2) 2233-578<br> 
-		<b>Email:</b> <a href="mailto:info@sln-ec.com" class="btn btn-inverse"> info@sln-ec.com </a>
-		<a href="mailto:operaciones@sln-ec.com" class="btn btn-inverse">operaciones@sln-ec.com  </a>
-			</div>
-		</div></fieldset>
-		</form>
+ <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">  
+ <div class="row placeholders">   
+ <div>
+ 	<?php
+ 	@print($alerta);
+ 	?>
+ </div>
+<form class="form-horizontal" role="form" method="post" action="<?php print base_url();?>/index.php/home/solicitud">
+  <div class="form-group">
+    <label for="provincia" class="col-sm-2 control-label">Provincia</label>
+    <div class="col-sm-10">
+    <select name='provincia'>
+    <option value="none" required="required">Seleccione...</option>
+    <option value="Bolivar">Direccion Provincial Agropecuaria De Bolivar</option>
+	<option value="Tungurahua">Dirección Provincial Agropecuaria De Tunguragua</option>
+	<option value="Chimborazo">Dirección Provincial Agropecuaria De Chimborazo</option>
+	<option value="Cotopaxi">Director Tecnico Area De Cotopaxi</option>
+	<option value="Cañar">Dirección Provincial Agropecuaria Del Cañar</option>
+	</select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="entrada" class="col-sm-2 control-label">Solicitado Por:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" name ="nombres" id="nombres" placeholder="Nombre y Apellido del solicitante" value="<?php echo set_value('mantenimientos'); ?>">
+    </div>
+  </div><div class="form-group">
+    <label for="entrada" class="col-sm-2 control-label">Cantidad de Mantenimientos:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" name ="mantenimientos" id="mantenimientos" placeholder="Numero que indique la cantidad" value="<?php echo set_value('mantenimientos'); ?>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="entrada" class="col-sm-2 control-label">Catidad de Reparaciones:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" name="reparaciones" id="reparaciones" placeholder="Numero que indique la cantidad" value="<?php echo set_value('reparaciones'); ?>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="entrada" class="col-sm-2 control-label">Cantidad de Inspecciones:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" name="inspecciones" id="inspecciones" placeholder="Numero que indique la cantidad" value="<?php echo set_value('inspecciones'); ?>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="entrada" class="col-sm-2 control-label">Detalles Adicionales:</label>
+    <div class="col-sm-10">
+      <textarea type="email" class="form-control" name="notas" id="notas" placeholder="Listado de Ciudades cantones o algún requerimiento adicional" rows="10"></textarea>
+      <?php echo set_value('notas'); ?>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+    </div>
+  </div>
+</form>
+</div>
+</div>

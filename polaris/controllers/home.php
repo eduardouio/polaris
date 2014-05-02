@@ -20,6 +20,7 @@ class Home extends CI_Controller {
 	private $Pagina_;
 	private $Controller_ = 'home';
 	private $CatalogoVistas_;
+	private $Mail_ = 'eduardouio7@gmail.com';
 
 	/**
 	* Funcion constructora
@@ -30,6 +31,7 @@ class Home extends CI_Controller {
 		$this->load->library('session')	;
 		$this->load->library('form_validation');
 		$this->load->model('modelo');
+		$this->load->helper('email');
 	}
 
 	/**
@@ -57,8 +59,6 @@ class Home extends CI_Controller {
 		
 	}
 
-
-
 	/**
 	 * Retorna un listado de cientes
 	 */
@@ -68,12 +68,50 @@ class Home extends CI_Controller {
 		$this->CatalogoVistas_['menu'] = array('clientes' => 'active' );		
 		$this->CatalogoVistas_['resultados'] = array('resultados' => $this->modelo->buscarVehiculo($this->input->post('vin')));
 		$this->mostrarhtml($this->CatalogoVistas_);
-	}else{
+		}else{
 		$this->index();
+			}
 	}
-	}
-	
 
+
+	/**
+	 * formulario de solicitud de mantenimientos
+	 */
+	public function solicitud(){
+		if (!$_POST){
+			$this->CatalogoVistas_['header'] = array('titulo' => 'Solicitud Mantenimiento' );
+			$this->CatalogoVistas_['menu'] = array('solicitud' => 'active' );
+			$this->CatalogoVistas_['solicitud'] = array('nada' => '' );		
+		}else{
+			#se recibe los datos enviados en el formulario de solicitud de inspoecciones 
+			if($this->form_validation->run() == true){
+			$this->CatalogoVistas_['header'] = array('titulo' => 'Solicitud Mantenimiento' );
+			$this->CatalogoVistas_['menu'] = array('solicitud' => 'active' );
+			$this->CatalogoVistas_['solicitud'] = array('alerta' => '<p><span class="alert alert-danger">Su colicitud no fue enviada complete los campos correctamente</span></p><p>&nbsp;</p>');				
+			}else{
+				$asunto = 'Solicitud ' . $this->input->post('nombres' . $this->input->post('provincia'));
+				$mantenimientos = $this->input->post('mantenimientos');
+				$reparaciones = $this->input->post('reparaciones');
+				$inspecciones = $this->input->post('inspecciones');
+				$notas = $this->input->post('notas');
+				$cuerpo = 'Mantenimientos: '. $mantenimientos . '\n Reparaciones:' . $reparaciones . '\n Inspecciones' . $inspecciones . '\n Notas:' . $notas ;
+				mail($this->Mail_,$asunto,$cuerpo);
+				$this->CatalogoVistas_['header'] = array('titulo' => 'Solicitud Mantenimiento' );
+				$this->CatalogoVistas_['menu'] = array('solicitud' => 'active' );
+				$this->CatalogoVistas_['solicitud'] = array('alerta' => '<p><span class="alert alert-success">Su colicitud fue enviada correctamente!.</span></p><p>&nbsp;</p>');
+			}
+
+		}
+		$this->mostrarhtml($this->CatalogoVistas_);
+	}
+
+	public function validar_formulario(){
+		$this->form_validation->set_rules('nombres', 'Nombres y Apellidos', 'trim|min_length[1]|max_length[200]|xss_clean');
+		$this->form_validation->set_rules('mantenimientos', 'numero mantenimientos', 'trim|min_length[1]|max_length[2]|xss_clean');
+		$this->form_validation->set_rules('reparaciones', 'Número reparaciones', 'trim|min_length[1|max_length[2]|xss_clean');
+		$this->form_validation->set_rules('inspoecciones', 'Número inspecciones', 'trim|min_length[1]|max_length[2]|xss_clean');
+		$this->form_validation->set_rules('notas', 'notas', 'trim|min_length[1]|max_length[900]|xss_clean');
+	}
 
 	/**
 	* Se encrarga de recibir la informacion y genera la pantalla de salia
