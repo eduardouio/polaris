@@ -22,7 +22,7 @@
   <div class="form-group">
     <label for="entrada" class="col-sm-2 control-label">Solicitado Por:</label>
     <div class="col-sm-10">
-      <input type="number" class="form-control" name ="nombres" id="nombres" placeholder="Nombre y Apellido del solicitante" value="<?php echo set_value('mantenimientos'); ?>">
+      <input type="text" class="form-control" name ="nombres" id="nombres" placeholder="Nombre y Apellido del solicitante" value="<?php echo set_value('mantenimientos'); ?>">
     </div>
   </div><div class="form-group">
     <label for="entrada" class="col-sm-2 control-label">Cantidad de Mantenimientos:</label>
@@ -45,7 +45,7 @@
   <div class="form-group">
     <label for="entrada" class="col-sm-2 control-label">Detalles Adicionales:</label>
     <div class="col-sm-10">
-      <textarea type="email" class="form-control" name="notas" id="notas" placeholder="Listado de Ciudades cantones o algún requerimiento adicional" rows="10"></textarea>
+      <textarea  class="form-control" name="notas" id="notas" placeholder="Listado de Ciudades cantones o algún requerimiento adicional" rows="10"></textarea>
       <?php echo set_value('notas'); ?>
     </div>
   </div>

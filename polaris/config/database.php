@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'elian';
-$db['default']['database'] = 'gelvsrm_polaris';
+$db['default']['hostname'] = '192.168.0.111';
+$db['default']['username'] = 'django';
+$db['default']['password'] = 'django';
+$db['default']['database'] = 'gelvscom_polaris';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
@@ -63,3 +63,7 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
+
+/* End of file database.php */
+/* Location: ./application/config/database.php */

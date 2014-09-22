@@ -1,4 +1,4 @@
-<small style="float:right;font: 70% sans-serif; ">
+                                <small style="float:right;font: 70% sans-serif; ">
     Desarrollado por: <a href="http://twitter.com/eduardouio">Eduardo Villota</a>
     <br>Todos los Derechos Reservados
   </small>
@@ -13,13 +13,13 @@
 $(document).ready(function(){
 $("#cliente").click(function(){ 
   $("#ajax").slideUp(1); 
-  $("#ajax").load("<?php print base_url();?>/polaris/views/form_cliente.html");
+  $("#ajax").load("<?php print base_url();?>form_cliente.html");
   $("#ajax").slideDown('slow');
 });
 
 $("#vin").click(function(){ 
   $("#ajax").slideUp(1); 
-  $("#ajax").load("<?php print base_url();?>/polaris/views/form_vin.html");
+  $("#ajax").load("<?php print base_url();?>form_vin.html");
   $("#ajax").slideDown('slow');  
 }); 
 }); 
@@ -33,3 +33,4 @@ $("#vin").click(function(){
 </script> 
 </body>
 </html>
+                            
